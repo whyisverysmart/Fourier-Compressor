@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Fourier-Compressor"
+version = "0.1.0"
+description = "DCT-based visual token compression for vision-language models."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Huanyu Wang", email = "whyisverysmart@gmail.com" },
+]
+keywords = ["vlm", "token-compression", "dct", "llava", "qwen2-vl", "qwen2.5-vl"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0",
+]
+
+[project.optional-dependencies]
+qwen = [
+    "transformers==4.51.3",
+    "qwen-vl-utils",
+]
+dev = ["ruff"]
+
+[project.urls]
+Homepage = "https://github.com/whyisverysmart/Fourier-Compressor"
+Repository = "https://github.com/whyisverysmart/Fourier-Compressor"
+Issues = "https://github.com/whyisverysmart/Fourier-Compressor/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fourier_compressor*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
