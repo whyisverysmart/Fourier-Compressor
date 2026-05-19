@@ -17,7 +17,7 @@ def compress_one_image(
     """Compress one image's visual tokens.
 
     Args:
-        features: tensor of shape ``[T * (H/2) * (W/2), C]`` — the post-vision-tower
+        features: tensor of shape ``[T * (H/2) * (W/2), C]`` - the post-vision-tower
             embeddings for a single image or video.
         grid_thw: 1D tensor of length 3 holding ``(T, H, W)`` BEFORE patch merge.
         ratio: fraction of frequencies to keep along each spatial axis.
@@ -54,10 +54,10 @@ def compress_visual_output(
     norm: str | None = "ortho",
     update_grid_thw_inplace: bool = True,
 ) -> torch.Tensor:
-    """Compress a batched visual-tower output and (optionally) update ``grid_thw`` in place.
+    """Compress a batched visual-tower output and optionally update ``grid_thw`` in place.
 
     Args:
-        embeds: tensor of shape ``[sum_i T_i*(H_i/2)*(W_i/2), C]`` — the
+        embeds: tensor of shape ``[sum_i T_i*(H_i/2)*(W_i/2), C]`` - the
             concatenated visual tokens for ``len(grid_thw)`` images/videos.
         grid_thw: tensor of shape ``[num_visuals, 3]`` with each row ``(T, H, W)``
             (before Qwen's 2x merge).

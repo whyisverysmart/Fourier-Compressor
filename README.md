@@ -13,10 +13,10 @@ LUMIA Lab, Shanghai Jiao Tong University
 
 ## TL;DR
 
-We present **Fourier Compressor**, a simple and parameter-free visual token compression module for VLMs. Our method removes redundancy in the **frequency domain** via 2-dimensional DCT, preserving semantic fidelity with negligible overhead. Fourier Compressor generalizes effectively across multiple VLM families, including LLaVA, Qwen2-VL, and Qwen2.5-VL, for both image and video understanding tasks.
+We present **Fourier Compressor**, a simple and parameter-free visual token compression module for VLMs. Our method removes redundancy in the **frequency domain** via two-dimensional Discrete Cosine Transform (DCT), preserving semantic fidelity with negligible overhead. Fourier Compressor generalizes effectively across multiple VLM architectures, including LLaVA, Qwen2-VL, and Qwen2.5-VL, for both image and video tasks.
 
 <div align="center">
-  <img src="assets/framework.png" width="75%" />
+  <img src="assets/framework.png" width="65%" />
 </div>
 
 ## Repository Structure
@@ -24,12 +24,11 @@ We present **Fourier Compressor**, a simple and parameter-free visual token comp
 ```text
 Fourier-Compressor/
 ├── fourier_compressor/
-│   ├── compress.py              # model-agnostic DCT compression
+│   ├── compress.py              # model-agnostic compression
 │   ├── dct.py                   # torch DCT / IDCT implementation
 │   └── integrations/
 │       ├── llava/               # LLaVA patch and source-edit notes
-│       ├── qwen2_vl/            # Qwen2-VL patch and helpers
-│       └── qwen2_5_vl/          # Qwen2.5-VL entry point
+│       └── qwen_vl/             # Qwen2/2.5-VL patch and helpers
 ├── examples/
 │   ├── infer_llava.py
 │   ├── infer_qwen2_vl.py
@@ -55,7 +54,7 @@ conda activate fourier-qwen
 pip install "transformers==4.51.3" qwen-vl-utils
 ```
 
-Install this package after the model-specific dependencies:
+Install Fourier Compressor after the model-specific dependencies:
 
 ```bash
 git clone https://github.com/whyisverysmart/Fourier-Compressor
@@ -90,7 +89,7 @@ Qwen2-VL requires two synchronized changes: compressing the visual output and up
 ```python
 import torch
 from transformers import AutoProcessor, Qwen2VLForConditionalGeneration
-from fourier_compressor.integrations.qwen2_vl import apply_to_qwen2_vl
+from fourier_compressor.integrations.qwen_vl import apply_to_qwen2_vl
 
 model_id = "Qwen/Qwen2-VL-2B-Instruct"
 model = Qwen2VLForConditionalGeneration.from_pretrained(
@@ -99,7 +98,7 @@ model = Qwen2VLForConditionalGeneration.from_pretrained(
 processor = AutoProcessor.from_pretrained(
     model_id,
     min_pixels=256 * 28 * 28,
-    max_pixels=1280 * 28 * 28,
+    max_pixels=2304 * 28 * 28,
 )
 
 apply_to_qwen2_vl(model, processor, ratio=2 / 3)
@@ -120,7 +119,7 @@ Qwen2.5-VL uses the same integration logic under `transformers==4.51.3`.
 ```python
 import torch
 from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration
-from fourier_compressor.integrations.qwen2_5_vl import apply_to_qwen2_5_vl
+from fourier_compressor.integrations.qwen_vl import apply_to_qwen2_5_vl
 
 model_id = "Qwen/Qwen2.5-VL-3B-Instruct"
 model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
@@ -129,7 +128,7 @@ model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
 processor = AutoProcessor.from_pretrained(
     model_id,
     min_pixels=256 * 28 * 28,
-    max_pixels=1280 * 28 * 28,
+    max_pixels=2304 * 28 * 28,
 )
 
 apply_to_qwen2_5_vl(model, processor, ratio=2 / 3)
@@ -152,13 +151,10 @@ Model weights trained with Fourier Compressor will be released in a future updat
 ## Citation
 
 ```bibtex
-@misc{wang2025fouriervlmcompressingvisiontokens,
-  title         = {Fourier-VLM: Compressing Vision Tokens in the Frequency Domain for Large Vision-Language Models},
-  author        = {Huanyu Wang and Jushi Kai and Haoli Bai and Lu Hou and Bo Jiang and Ziwei He and Zhouhan Lin},
-  year          = {2025},
-  eprint        = {2508.06038},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.CV},
-  url           = {https://arxiv.org/abs/2508.06038}
+@article{wang2025fourier,
+    title={Fourier Compressor: Frequency-Domain Visual Token Compression for Vision-Language Models},
+    author={Wang, Huanyu and Kai, Jushi and Bai, Haoli and Hou, Lu and Jiang, Bo and He, Ziwei and Lin, Zhouhan},
+    journal={arXiv preprint arXiv:2508.06038},
+    year={2025}
 }
 ```

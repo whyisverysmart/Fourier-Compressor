@@ -3,7 +3,7 @@ import torch
 from transformers import AutoProcessor, Qwen2VLForConditionalGeneration
 
 from qwen_vl_utils import process_vision_info
-from fourier_compressor.integrations.qwen2_vl import apply_to_qwen2_vl
+from fourier_compressor.integrations.qwen_vl import apply_to_qwen2_vl
 
 
 def main():
@@ -11,7 +11,6 @@ def main():
     parser.add_argument(
         "--model",
         default="Qwen/Qwen2-VL-2B-Instruct",
-        help="2B is plenty for a sanity check; switch to 7B for full fidelity",
     )
     parser.add_argument("--image", required=True)
     parser.add_argument("--query", default="Describe this image briefly.")

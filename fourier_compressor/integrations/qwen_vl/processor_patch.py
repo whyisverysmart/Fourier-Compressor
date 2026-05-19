@@ -8,7 +8,7 @@ def _new_half(half_grid: int, ratio: float) -> int:
 
 
 def compressed_placeholder_count(grid_thw, ratio: float = 2 / 3) -> int:
-    """Placeholder tokens for ONE image / video after DCT compression.
+    """Placeholder tokens for one image or video after DCT compression.
 
     ``grid_thw`` is the pre-merge patch grid ``(T, H, W)``; it may be a 1-D
     tensor, list, or tuple. Returns ``T * new_h * new_w`` where
@@ -22,12 +22,7 @@ def compressed_placeholder_count(grid_thw, ratio: float = 2 / 3) -> int:
 
 
 def _get_processor_kwargs_cls(processor):
-    """Auto-detect the ``<ProcessorName>Kwargs`` class for a Qwen-VL processor.
-
-    For ``Qwen2VLProcessor`` returns ``Qwen2VLProcessorKwargs``; for
-    ``Qwen2_5_VLProcessor`` returns ``Qwen2_5_VLProcessorKwargs``. Looks up
-    the class in the same module as ``type(processor)``.
-    """
+    """Auto-detect the ``<ProcessorName>Kwargs`` class for a Qwen-VL processor."""
     cls = type(processor)
     kwargs_name = cls.__name__ + "Kwargs"
     module = importlib.import_module(cls.__module__)
@@ -58,9 +53,7 @@ def patch_processor(processor, ratio: float = 2 / 3):
     try:
         from transformers.feature_extraction_utils import BatchFeature
     except ImportError as e:
-        raise ImportError(
-            "patch_processor requires the `transformers` package."
-        ) from e
+        raise ImportError("patch_processor requires the `transformers` package.") from e
 
     ProcessorKwargs = _get_processor_kwargs_cls(processor)
 
@@ -80,12 +73,8 @@ def patch_processor(processor, ratio: float = 2 / 3):
             image_grid_thw = None
 
         if videos is not None:
-            # Use videos_kwargs if present (the matching processor's ProcessorKwargs
-            # typically declares it); fall back to images_kwargs for older versions.
             videos_kw = output_kwargs.get("videos_kwargs", output_kwargs["images_kwargs"])
-            videos_inputs = self.image_processor(
-                images=None, videos=videos, **videos_kw
-            )
+            videos_inputs = self.image_processor(images=None, videos=videos, **videos_kw)
             video_grid_thw = videos_inputs["video_grid_thw"]
         else:
             videos_inputs = {}
