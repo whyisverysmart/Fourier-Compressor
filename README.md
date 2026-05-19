@@ -6,7 +6,7 @@ Huanyu Wang, Jushi Kai, Haoli Bai, Lu Hou, Bo Jiang, Ziwei He, Zhouhan Lin
 
 LUMIA Lab, Shanghai Jiao Tong University
 
-[Paper](https://arxiv.org/abs/2508.06038)
+[![arXiv](https://img.shields.io/badge/arXiv-2508.06038-b31b1b.svg)](https://arxiv.org/abs/2508.06038) [![Models](https://img.shields.io/badge/🤗%20Hugging%20Face-Models-yellow)](https://huggingface.co/collections/whyisverysmart/fourier-compressor)
 
 -----------------
 </div>
@@ -97,11 +97,11 @@ model = Qwen2VLForConditionalGeneration.from_pretrained(
 )
 processor = AutoProcessor.from_pretrained(
     model_id,
-    min_pixels=256 * 28 * 28,
-    max_pixels=2304 * 28 * 28,
+    min_pixels=256*28*28,
+    max_pixels=2304*28*28,
 )
 
-apply_to_qwen2_vl(model, processor, ratio=2 / 3)
+apply_to_qwen2_vl(model, processor, ratio=2/3)
 
 # Build inputs and generate as in the official Qwen-VL examples.
 ```
@@ -127,11 +127,11 @@ model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
 )
 processor = AutoProcessor.from_pretrained(
     model_id,
-    min_pixels=256 * 28 * 28,
-    max_pixels=2304 * 28 * 28,
+    min_pixels=256*28*28,
+    max_pixels=2304*28*28,
 )
 
-apply_to_qwen2_5_vl(model, processor, ratio=2 / 3)
+apply_to_qwen2_5_vl(model, processor, ratio=2/3)
 ```
 
 Example:
@@ -146,7 +146,15 @@ For benchmark evaluation, follow the original evaluation scripts of the correspo
 
 ## Model Weights
 
-Model weights trained with Fourier Compressor will be released in a future update.
+| Model | Base Model | Visual Tokens | Compression | Weights |
+|---|---|---|---|---|
+| Fourier-LLaVA-v1.5-7B-256 | LLaVA-v1.5-7B | 256 | 55.6% | [🤗 HF](https://huggingface.co/whyisverysmart/Fourier-LLaVA-v1.5-7B-256) |
+| Fourier-LLaVA-v1.5-7B-144 | LLaVA-v1.5-7B | 144 | 75.0% | [🤗 HF](https://huggingface.co/whyisverysmart/Fourier-LLaVA-v1.5-7B-144) |
+| Fourier-LLaVA-v1.5-7B-64 | LLaVA-v1.5-7B | 64 | 88.9% | [🤗 HF](https://huggingface.co/whyisverysmart/Fourier-LLaVA-v1.5-7B-64) |
+| Fourier-LLaVA-v1.5-7B-36 | LLaVA-v1.5-7B | 36 | 93.8% | [🤗 HF](https://huggingface.co/whyisverysmart/Fourier-LLaVA-v1.5-7B-36) |
+| Fourier-LLaVA-v1.5-13B-144 | LLaVA-v1.5-13B | 144 | 75.0% | [🤗 HF](https://huggingface.co/whyisverysmart/Fourier-LLaVA-v1.5-13B-144) |
+| Fourier-Qwen2-VL-2B-0.67 | Qwen2-VL-2B-Instruct | Dynamic | 55.6% | [🤗 HF](https://huggingface.co/whyisverysmart/Fourier-Qwen2-VL-2B-0.67) |
+| Fourier-Qwen2.5-VL-3B-0.67 | Qwen2.5-VL-3B-Instruct | Dynamic | 55.6% | [🤗 HF](https://huggingface.co/whyisverysmart/Fourier-Qwen2.5-VL-3B-0.67) |
 
 ## Citation
 
