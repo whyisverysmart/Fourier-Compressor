@@ -6,7 +6,7 @@ Huanyu Wang, Jushi Kai, Haoli Bai, Lu Hou, Bo Jiang, Ziwei He, Zhouhan Lin
 
 LUMIA Lab, Shanghai Jiao Tong University
 
-[![ECCV 2026](https://img.shields.io/badge/ECCV-2026-blue)]() [![arXiv](https://img.shields.io/badge/arXiv-2508.06038-b31b1b.svg)](https://arxiv.org/abs/2508.06038) [![Models](https://img.shields.io/badge/🤗%20Hugging%20Face-Models-yellow)](https://huggingface.co/collections/whyisverysmart/fourier-compressor)
+![ECCV 2026](https://img.shields.io/badge/ECCV-2026-blue) [![arXiv](https://img.shields.io/badge/arXiv-2508.06038-b31b1b.svg)](https://arxiv.org/abs/2508.06038) [![Models](https://img.shields.io/badge/🤗%20Hugging%20Face-Models-yellow)](https://huggingface.co/collections/whyisverysmart/fourier-compressor)
 
 -----------------
 </div>
